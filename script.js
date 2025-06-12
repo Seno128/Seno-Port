@@ -44,3 +44,15 @@ document.querySelectorAll('.project-card, .about-content, form').forEach(el => {
 
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
+
+const sliderTrack = document.querySelector(".slider-track");
+const prevBtn = document.querySelector(".slider-btn.prev");
+const nextBtn = document.querySelector(".slider-btn.next");
+
+nextBtn.addEventListener("click", () => {
+  sliderTrack.scrollBy({ left: 320, behavior: "smooth" });
+});
+
+prevBtn.addEventListener("click", () => {
+  sliderTrack.scrollBy({ left: -320, behavior: "smooth" });
+});
