@@ -13,12 +13,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Form Submission
 const form = document.querySelector('form');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  alert('Thank you for your message!');
-  form.reset();
+form.addEventListener('submit', () => {
+  setTimeout(() => {
+    alert('Terima kasih telah menghubungi saya!');
+  }, 100);
 });
 
 // Animation on Scroll
