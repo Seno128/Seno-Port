@@ -294,27 +294,85 @@ footer {
   border-radius: 5px;
 }
 
-.slider-btn {
+.projects .slider-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #111;
+  background: rgba(0,0,0,0.7);
   color: white;
   border: none;
   font-size: 2rem;
   padding: 0 15px;
   cursor: pointer;
   z-index: 10;
-  opacity: 0.7;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.slider-btn:hover {
-  opacity: 1;
+.projects .slider-btn:hover {
+  background: rgba(0,0,0,0.9);
 }
 
-.slider-btn.prev {
-  left: 0;
+.projects .slider-btn.prev {
+  left: 20px;
 }
-.slider-btn.next {
-  right: 0;
+.projects .slider-btn.next {
+  right: 20px;
+}
+
+/* Partner Section */
+.Partner {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.partner-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem; /* Jarak antar partner */
+  margin-top: 2rem;
+}
+
+.partner-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* Jarak antara teks dan ikon */
+}
+
+.partner-item h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.instagram-btn {
+  background: var(--light);
+  color: #E1306C; /* Warna Instagram */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.instagram-btn:hover {
+  background: #E1306C;
+  color: white;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .projects .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
 }
