@@ -1,58 +1,89 @@
-// Mobile Navigation
-document.querySelector('.burger').addEventListener('click', () => {
-  document.querySelector('.nav-links').classList.toggle('active');
-});
-
-// Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-});
-
-const form = document.querySelector('form');
-form.addEventListener('submit', () => {
-  setTimeout(() => {
-    alert('Terima kasih telah menghubungi saya!');
-  }, 100);
-});
-
-// Animation on Scroll
-const animateOnScroll = () => {
-  const elements = document.querySelectorAll('.project-card, .about-content, form');
-  
-  elements.forEach(element => {
-    const elementPosition = element.getBoundingClientRect().top;
-    const screenPosition = window.innerHeight / 1.3;
+document.addEventListener('DOMContentLoaded', function() {
+    const wishBtn = document.getElementById('wishBtn');
+    const heartsContainer = document.getElementById('hearts');
+    const birthdaySong = document.getElementById('birthdaySong');
+    const nameElement = document.getElementById('name');
+    const senderElement = document.getElementById('sender');
+    const card = document.querySelector('.card');
     
-    if (elementPosition < screenPosition) {
-      element.style.opacity = '1';
-      element.style.transform = 'translateY(0)';
+    // Customize these values
+    const birthdayPerson = "Pikaaa";
+    const yourName = "Senoo";
+    const messages = [
+        "Makasih yaaa udah kasih dbesto waktu ituu, hehe. Maaf aku baru inget itu kamu😁",
+        "Semoga aku jadi yang pertama ngucapin kamu ultah🙌",
+        "Semoga hari ini dan hari-hari setelah ini kamu bakal makin bahagia dari hari-hari sebelumnya yaaa",
+        "Semoga nanti kamu keterima di kampus dan jurusan yang kamu tujuuu yaaaa",
+        "Katanya kalo ulang tahun, yang ulang tahun harus jajanin yang ngucapin tauu😏"
+    ];
+    
+    // Set names
+    nameElement.textContent = birthdayPerson;
+    senderElement.textContent = yourName;
+    
+    // Create hearts animation
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        heartsContainer.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
     }
-  });
-};
-
-// Set initial state
-document.querySelectorAll('.project-card, .about-content, form').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'all 0.5s ease';
-});
-
-window.addEventListener('scroll', animateOnScroll);
-window.addEventListener('load', animateOnScroll);
-
-const sliderTrack = document.querySelector("#projects .slider-track");
-const prevBtn = document.querySelector("#projects .slider-btn.prev");
-const nextBtn = document.querySelector("#projects .slider-btn.next");
-
-nextBtn.addEventListener("click", () => {
-  sliderTrack.scrollBy({ left: 320, behavior: "smooth" });
-});
-
-prevBtn.addEventListener("click", () => {
-  sliderTrack.scrollBy({ left: -320, behavior: "smooth" });
+    
+    // Create confetti
+    function createConfetti() {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+    }
+    
+    // Button click event
+    wishBtn.addEventListener('click', function() {
+        // Play music
+        birthdaySong.play();
+        
+        // Create 50 hearts
+        for(let i = 0; i < 50; i++) {
+            createHeart();
+            createConfetti();
+        }
+        
+        // Change button text
+        this.textContent = "Enjoy Your Day!";
+        this.style.backgroundColor = "#d23669";
+        
+        // Rotate card slightly
+        card.style.transform = "rotateY(10deg)";
+        
+        // Change message every 3 seconds
+        let counter = 0;
+        const messageInterval = setInterval(() => {
+            document.querySelector('.wish').textContent = messages[counter % messages.length];
+            counter++;
+        }, 3000);
+        
+        // Stop after all messages shown
+        setTimeout(() => {
+            clearInterval(messageInterval);
+        }, messages.length * 3000);
+    });
+    
+    // Enable clicking anywhere on card to create hearts
+    card.addEventListener('click', function(e) {
+        if(e.target.id !== 'wishBtn') {
+            createHeart();
+        }
+    });
 });
